@@ -66,13 +66,13 @@ import { Link } from 'react-router-dom';
                <table className="table table-striped" style={{marginTop:20}}>
                <thead>
                    <tr>
-                       <th>
+                       <th style={{textAlign:"center"}}>
                             Title
                        </th>
-                       <th>
+                       <th style={{textAlign:"center"}}>
                             Comment
                        </th>
-                       <th colSpan="2">
+                       <th colSpan="2" style={{textAlign:"center"}}>
                             Action
                        </th>
                    </tr>

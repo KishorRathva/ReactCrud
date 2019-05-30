@@ -55,10 +55,11 @@ export default class Create extends Component {
             </div>
             <div className="form-group">
                 <label>Comment: </label>
-                <input type="text" 
+                <textarea type="text" 
                   className="form-control"
                   value={this.state.body}
                   onChange={this.onChangeBody}
+                  rows="4"
                   />
             </div>
             <div className="form-group">
