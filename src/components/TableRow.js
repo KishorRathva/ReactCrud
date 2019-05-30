@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 export class TableRow extends Component {
     constructor(props) {
         super(props)
@@ -11,14 +10,18 @@ export class TableRow extends Component {
 
     delete(){
         console.log(this.props.obj.id)
-        let sure = alert("are you sure");
-        if(sure){
-            axios.delete('https://jsonplaceholder.typicode.com/posts/'+this.props.obj.id )
-        .then(() => {
-            console.log('Deleted');
-        })
-        .catch(err => console.log(err))
-        }
+        console.log("from tablerows")
+        // const confirmation = confirm('Are you sure to delete?');
+        // console.log(confirmation);
+    //      if(window.confirm("Are you sure to delete?")) {
+    //         axios.delete('https://jsonplaceholder.typicode.com/posts/'+this.props.obj.id)
+    //     .then(() => {
+    //         console.log('Deleted');
+
+    //     })
+    //     .catch(err => console.log(err));
+    //    }
+          this.props.Delete(this.props.obj.id);
         
     }
     
@@ -34,7 +37,8 @@ export class TableRow extends Component {
                 </td>
                 <td>
                 <Link to={ {pathname:"/edit/"+this.props.obj.id,
-                            dataPro:this.props.obj}}  className="btn btn-primary">Edit</Link>
+                            dataPro:this.props.obj,
+                            Delete:this.props.Delete}}  className="btn btn-primary">Edit</Link>
                 </td>
                 <td>
                     <button onClick={this.delete} className="btn btn-danger">Delete</button>

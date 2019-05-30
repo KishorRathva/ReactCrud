@@ -25,12 +25,12 @@ class editComponent extends Component {
       }
       onChangeTitle(e){
         this.setState({
-          name:e.target.value
+          title:e.target.value
         });
       }
       onChangeBody(e){
         this.setState({
-          capital:e.target.value
+          body:e.target.value
         })
       }
       onSubmit(e){
@@ -47,14 +47,17 @@ class editComponent extends Component {
     }
     delete(){
       console.log(this.props.match.params.id);
-      let sure = alert("are you sure");
-      if(sure){
-          axios.delete('https://jsonplaceholder.typicode.com/posts/'+this.props.match.params.id )
-      .then(() => {
-          console.log('Deleted');
-      })
-      .catch(err => console.log(err))
-      }
+      // let sure = alert("are you sure");
+      // if(sure){
+      //     axios.delete('https://jsonplaceholder.typicode.com/posts/'+this.props.match.params.id )
+      // .then(() => {
+      //     console.log('Deleted');
+      // })
+      // .catch(err => console.log(err))
+      // }
+      console.log("from editComponents ");
+      this.props.location.Delete(this.props.match.params.id);
+      this.props.history.replace('/index');
       
   }
     render() {
@@ -74,10 +77,11 @@ class editComponent extends Component {
               </div>
               <div className="form-group">
                   <label>Comment: </label>
-                  <input type="text" 
+                  <textarea type="text" 
                     className="form-control"
                     value={this.state.body}
                     onChange={this.onChangeBody}
+                    rows="4"
                     />
               </div>
               <div className="form-group">
