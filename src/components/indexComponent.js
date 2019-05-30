@@ -17,18 +17,6 @@ import { Link } from 'react-router-dom';
 
          console.log('inside test');
      }
-     componentDidUpdate(){
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then(res => {
-           
-             this.setState({Empdata:res.data});
-           //   console.log(this.state.Empdata)
-       
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-     }
 
      componentDidMount(){
          axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -44,9 +32,31 @@ import { Link } from 'react-router-dom';
      }
      TableRow(){
          return this.state.Empdata.map((object)=>{
-             return <TableRow obj={object} key={object.id}/>;
+             return <TableRow obj={object} Delete={this.delete} key={object.id}/>;
          })
      }
+     delete = (id) => {
+        console.log("from indexComponents");
+        console.log(id);
+        const index = this.state.Empdata.findIndex(x =>  x.id == id);
+    
+        console.log(index)
+
+        if(window.confirm("Are you sure to delete?")){
+            axios.delete('https://jsonplaceholder.typicode.com/posts/'+id )
+        .then(() => {
+            console.log('Deleted');
+
+            this.state.Empdata.splice(index,1);
+            this.setState({Empdata:this.state.Empdata});
+            // console.log(this.state.Empdata)
+          
+
+        })
+        .catch(err => console.log(err))
+        }
+        
+    }
      
     render() {
         return (

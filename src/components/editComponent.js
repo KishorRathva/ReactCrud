@@ -25,12 +25,12 @@ class editComponent extends Component {
       }
       onChangeTitle(e){
         this.setState({
-          name:e.target.value
+          title:e.target.value
         });
       }
       onChangeBody(e){
         this.setState({
-          capital:e.target.value
+          body:e.target.value
         })
       }
       onSubmit(e){
@@ -47,14 +47,17 @@ class editComponent extends Component {
     }
     delete(){
       console.log(this.props.match.params.id);
-      let sure = alert("are you sure");
-      if(sure){
-          axios.delete('https://jsonplaceholder.typicode.com/posts/'+this.props.match.params.id )
-      .then(() => {
-          console.log('Deleted');
-      })
-      .catch(err => console.log(err))
-      }
+      // let sure = alert("are you sure");
+      // if(sure){
+      //     axios.delete('https://jsonplaceholder.typicode.com/posts/'+this.props.match.params.id )
+      // .then(() => {
+      //     console.log('Deleted');
+      // })
+      // .catch(err => console.log(err))
+      // }
+      console.log("from editComponents ");
+      this.props.location.Delete(this.props.match.params.id);
+      this.props.history.push('/index');
       
   }
     render() {
