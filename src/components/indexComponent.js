@@ -35,7 +35,7 @@ class indexComponent extends Component {
   //Add  chuncks
   createChunk() {
     console.log("inside chunk");
-    this.chuncks = _.chunk(this.mainData, 5);
+    this.chuncks = _.chunk(this.mainData, 10);
     this.setState({
         Empdata:this.chuncks[0]
       });
@@ -45,7 +45,7 @@ class indexComponent extends Component {
   //pagination
 
   pagination() {
-    return _.range(20).map(i => {
+    return _.range(10).map(i => {
       return (
         <li className="page-item">
           <a className="page-link" key={i} onClick={this.changePage.bind(null,i)}>
