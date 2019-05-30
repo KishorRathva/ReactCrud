@@ -5,13 +5,15 @@ import axios from 'axios';
 class editComponent extends Component {
     constructor(props) {
         super(props)
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeBody = this.onChangeBody.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeSalary = this.onChangeSalary.bind(this);
+        this.onChangeAge = this.onChangeAge.bind(this);
         this.delete = this.delete.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
-           title:'',
-           body:''
+           employee_name:'',
+           employee_salary:'',
+           employee_age:''
         }
       }
 
@@ -19,32 +21,39 @@ class editComponent extends Component {
       
         console.log(this.props)
         this.setState({
-                      title:this.props.location.dataPro.title,
-                      body:this.props.location.dataPro.body
+                      employee_name:this.props.location.dataPro.employee_name,
+                      employee_salary:this.props.location.dataPro.employee_salary,
+                      employee_age : this.props.location.dataPro.employee_age,
                   });
       }
-      onChangeTitle(e){
+      onChangeName(e){
         this.setState({
-          title:e.target.value
+          employee_name:e.target.value
         });
       }
-      onChangeBody(e){
+      onChangeSalary(e){
         this.setState({
-          body:e.target.value
+          employee_salary:e.target.value
+        })
+      }
+      onChangeAge(e){
+        this.setState({
+          employee_age:e.target.value
         })
       }
       onSubmit(e){
         e.preventDefault();
         const obj = {
-            _id:this.props.match.params.id,
-            name : this.state.title,
-            capital: this.state.body
+            name : this.state.employee_name,
+            age: this.state.employee_age,
+            salary : this.state.employee_salary
         };
-        axios.put('https://jsonplaceholder.typicode.com/posts',obj)
-        .then(res => console.log(res.data));
-
-        this.props.history.push('/index');
-    }
+        axios.put('http://dummy.restapiexample.com/api/v1/update/'+this.props.match.params.id,obj)
+        .then(res => {
+          console.log(res.data);
+          this.props.history.push('/index');
+        });
+      }
     delete(){
       console.log(this.props.match.params.id);
       // let sure = alert("are you sure");
@@ -57,33 +66,42 @@ class editComponent extends Component {
       // }
       console.log("from editComponents ");
       this.props.location.Delete(this.props.match.params.id);
-      this.props.history.replace('/index');
+      this.props.history.push('/index');
       
   }
     render() {
         return (
           <div style={{ marginTop: 10 }}>
               <button onClick={this.delete} className="btn btn-danger">Delete</button>
-          <h3>Write Post:</h3>
+          <h3>Edit Emplyee:</h3>
           <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                  <label>Title:  </label>
+                  <label>Name:  </label>
                   <input 
                     type="text" 
                     className="form-control" 
-                    value={this.state.title}
-                    onChange={this.onChangeTitle}
+                    value={this.state.employee_name}
+                    onChange={this.onChangeName}
                     />
               </div>
               <div className="form-group">
-                  <label>Comment: </label>
-                  <textarea type="text" 
-                    className="form-control"
-                    value={this.state.body}
-                    onChange={this.onChangeBody}
-                    rows="4"
+                  <label>Salary:  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    value={this.state.employee_salary}
+                    onChange={this.onChangeSalary}
                     />
-              </div>
+              </div> 
+              <div className="form-group">
+                  <label>Age:  </label>
+                  <input 
+                    type="text" 
+                    className="form-control" 
+                    value={this.state.employee_age}
+                    onChange={this.onChangeAge}
+                    />
+              </div>     
               <div className="form-group">
              
                   <input type="submit" value="Submit" className="btn btn-primary"/>

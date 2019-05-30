@@ -11,7 +11,6 @@ class indexComponent extends Component {
     this.changePage = this.changePage.bind(this);
     this.state = {
       Empdata: [],
-      offset: 0
     };
   }
 
@@ -20,7 +19,7 @@ class indexComponent extends Component {
   }
   loadPostDataFromServer() {
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get("http://dummy.restapiexample.com/api/v1/employees")
       .then(res => {
         console.log(res.data.length);
         this.mainData = res.data;
@@ -78,7 +77,7 @@ class indexComponent extends Component {
 
     if (window.confirm("Are you sure to delete?")) {
       axios
-        .delete("https://jsonplaceholder.typicode.com/posts/" + id)
+        .delete("http://dummy.restapiexample.com/api/v1/delete/" + id)
         .then(() => {
           console.log("Deleted");
 
@@ -94,14 +93,15 @@ class indexComponent extends Component {
     return (
       <div>
         <Link to={{ pathname: "/create/" }} className="btn btn-success">
-          Create Post
+          Add Emplyee
         </Link>
-        <h3 align="center">Posts </h3>
+        <h3 align="center">Emplyees</h3>
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
             <tr>
-              <th style={{ textAlign: "center" }}>Title</th>
-              <th style={{ textAlign: "center" }}>Comment</th>
+              <th style={{ textAlign: "center" }}>Name</th>
+              <th style={{ textAlign: "center" }}>Salary</th>
+              <th style={{ textAlign: "center" }}>Age</th>
               <th colSpan="2" style={{ textAlign: "center" }}>
                 Action
               </th>

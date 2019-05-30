@@ -26,14 +26,17 @@ export class TableRow extends Component {
     }
     
     render() {
-        const { title , body} = this.props.obj ;
+        const { employee_name , employee_salary , employee_age } = this.props.obj ;
         return (
             <tr>
                 <td>
-                    {title}
+                    { employee_name}
                 </td>
                 <td>
-                    {body}
+                    { employee_salary }
+                </td>
+                <td>
+                    { employee_age }
                 </td>
                 <td>
                 <Link to={ {pathname:"/edit/"+this.props.obj.id,
