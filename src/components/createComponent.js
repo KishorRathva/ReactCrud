@@ -37,6 +37,7 @@ export default class Create extends Component {
           title:"",
           body:""
         })
+        this.props.history.push('/index');
       }
  
   render() {

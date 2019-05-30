@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link ,Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class editComponent extends Component {
@@ -43,7 +43,7 @@ class editComponent extends Component {
         axios.put('https://jsonplaceholder.typicode.com/posts',obj)
         .then(res => console.log(res.data));
 
-        this.props.history.replace('/index');
+        this.props.history.push('/index');
     }
     delete(){
       console.log(this.props.match.params.id);
